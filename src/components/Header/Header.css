@@ -1,0 +1,76 @@
+.header {
+  width: 1440px;
+  height: 80px;
+  border: 1px solid rgba(196, 196, 196, 0.01);
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+  position: absolute;
+  /* color: #ffffff; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.header__title {
+  margin-left: 104px;
+  font-family: "Robotoslab regular";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.header__title:hover {
+  cursor: pointer;
+}
+
+.header__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.header__link {
+  text-decoration: none;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: inherit;
+  margin-left: 34px;
+}
+
+.header__link:hover {
+  cursor: pointer;
+}
+
+.header__link_status_disable {
+    display: none;
+}
+
+.header__log-button {
+  background: transparent;
+  max-width: 176px;
+  text-align: center;
+  border-radius: 100px;
+  height: 48px;
+  border: 1px solid;
+  color: inherit;
+  margin-right: 104px;
+  margin-left: 32px;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.header__log-button:hover {
+  cursor: pointer;
+}

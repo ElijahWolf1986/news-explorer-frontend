@@ -1,0 +1,42 @@
+.about {
+  margin: auto;
+  padding: 100px 0;
+  max-width: 1440px;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: flex-start;
+}
+
+.about__author-photo {
+  margin-left: 104px;
+  width: 464px;
+  height: 464px;
+  border-radius: 50%;
+}
+
+.about__info {
+  margin-left: 56px;
+  margin-top: 50px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about__title {
+  margin: 0;
+  font-family: "Robotoslab regular";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+.about__paragraph {
+  margin: 24px 0 0 0;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
