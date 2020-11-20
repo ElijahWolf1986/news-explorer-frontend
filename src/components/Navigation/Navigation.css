@@ -1,0 +1,79 @@
+.nav__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__link {
+  text-decoration: none;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: inherit;
+  margin-left: 34px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.nav__link_status_active {
+  border-bottom: 3px solid;
+  border-color: inherit;
+}
+
+.nav__link:hover {
+  cursor: pointer;
+}
+
+.nav__link_status_disable {
+  display: none;
+}
+
+.nav__log-button {
+  background: transparent;
+  max-width: 176px;
+  text-align: center;
+  border-radius: 100px;
+  height: 48px;
+  border: 1px solid;
+  color: inherit;
+  margin-right: 104px;
+  margin-left: 32px;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.nav__log-button:hover {
+  cursor: pointer;
+}
+
+.nav__log-button:focus {
+  outline: none;
+}
+
+.nav__svg {
+  margin: 0 0 0 5px;
+  display: none;
+}
+
+.nav__svg-border_state_account {
+  fill: white;
+}
+
+.nav__svg_state_active {
+  display: block;
+}

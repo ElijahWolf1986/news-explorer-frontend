@@ -1,9 +1,18 @@
 .main {
+    margin: auto;
+    /* border: 1px solid red; */
+}
+
+
+.main__cover {
     max-width: 1440px;
     height: 576px;
     /* border: 1px solid red; */
-    margin: auto;
-    background-image: url('../../images/main/bg-image.jpg');
+    background-image: url('../../images/main/bg-image.png');
     background-position: center;
     background-size: cover;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 

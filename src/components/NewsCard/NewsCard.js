@@ -6,9 +6,9 @@ function NewsCard(props) {
     <div className="newscard">
 
       <div className="newscard__header">
-        <button className="newscard__keyword">Природа</button>
-        <button className="newscard__delete-button"></button>
-        <button className="newscard__save-button_status_loggedIn newscard__save-button_status_saved"></button>
+        <button className="newscard__keyword newscard__keyword_status_enabled">Природа</button>
+        <button className="newscard__delete-button newscard__delete-button_status_enabled"></button>
+        <button className="newscard__save-button"></button>
         <img
           src={testPhoto}
           alt="фото карточки тестовое"

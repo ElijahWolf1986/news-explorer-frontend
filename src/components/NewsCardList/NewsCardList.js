@@ -2,17 +2,16 @@ import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
 
 function NewsCardList(props) {
-    return (
-      <div className="news-cardlist">
-          <NewsCard />
-          <NewsCard />
-          <NewsCard />
-          <NewsCard />
-
-        
+  return (
+    <section className="news-cardlist">
+      <div className="news-cardlist-gallery">
+        <NewsCard />
+        <NewsCard />
+        <NewsCard />
       </div>
-    );
-  }
-  
-  export default NewsCardList;
-  
+    </section>
+  );
+}
+
+export default NewsCardList;
+ 

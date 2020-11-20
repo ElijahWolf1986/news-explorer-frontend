@@ -1,0 +1,56 @@
+.saved-news-header {
+  margin: 40px 0 56px 104px;
+}
+
+.saved-news-header__title {
+  font-family: "Roboto regular";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 27, 34, 0.5);
+}
+
+.saved-news-header__statistic {
+  margin: 28px 0 30px 0;
+  font-family: "Robotoslab regular";
+  font-style: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+}
+
+.saved-news-header__statistic-info {
+  margin: 0;
+  padding: 0;
+}
+
+.saved-news-header__statistic-paragraph {
+  margin: 0;
+  padding: 0;
+}
+
+.saved-news-header__keywords {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.saved-news-header__keywords-paragraph {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto regular";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
+}
+
+.saved-news-header__keywords-result {
+  margin: 0 0 0 10px;
+  padding: 0;
+  font-family: "Roboto black";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
+}
