@@ -1,8 +1,12 @@
 .newscard {
+  margin-top: 62px;
+}
+
+.newscard__item {
   margin: 0;
   padding: 0;
   width: 400px;
-  height: 576px;
+  /* height: 576px; */
   /* border: 1px solid blue; */
   border-radius: 16px;
   overflow: hidden;
@@ -161,7 +165,8 @@
 
 .newscard__img {
   width: 100%;
-  object-fit: cover;
+  height: 272px;
+  object-fit: fill;
 }
 
 .newscard__data {
@@ -201,7 +206,7 @@
   color: #1a1b22;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 

@@ -1,15 +1,12 @@
 .news-cardlist {
-    background-color: #f5f6f7;
-
+  background-color: #f5f6f7;
 }
 
 .news-cardlist-gallery {
   margin: auto;
-  padding: 62px 0;
   position: relative;
   display: grid;
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   max-width: 1232px;
-  /* border: 1px solid red; */
 }

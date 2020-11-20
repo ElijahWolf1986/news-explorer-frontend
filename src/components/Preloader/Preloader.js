@@ -1,12 +1,17 @@
 import React from "react";
 
-function Preloader() {
+function Preloader(props) {
+
   return (
-    <div className="preloader">
-      <i class="circle-preloader"></i>
+    <div className={`preloader ${
+            props.isPreloader &&
+            "preloader_state_active"
+          }`}>
+      <i className="circle-preloader"></i>
       <p className="preloader__paragraph">Идет поиск новостей...</p>
     </div>
   );
 }
 
 export default Preloader;
+ 

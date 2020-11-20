@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Router, Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 // import logo from '../../logo.svg';
@@ -8,35 +9,33 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
 
+// import NewsApi from "../../utils/NewsApi";
+
+// import { url, update, size, apiKey } from "../../utils/Utils";
 
 function App() {
   const history = useHistory();
   const [loggedIn, setLoggedIn] = React.useState(true);
 
   return (
-      <Router history={history}>
+    <Router history={history}>
+      <div className="page">
+        <Header loggedIn={loggedIn} />
 
-        <div className="page">
-
-          <Header loggedIn={loggedIn} />
-          
-          <Switch>
-
+        <Switch>
           <Route exact path="/">
-          <Main />
+            <Main />
           </Route>
 
           <Route path="/saved-news">
-          <SavedNews />
+            <SavedNews />
           </Route>
+        </Switch>
 
-          </Switch>
-                    
-          <Footer />
-        </div>
-       </Router>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
 export default App;
- 
