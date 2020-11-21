@@ -1,13 +1,14 @@
 .newscard {
-  margin-top: 62px;
+  /* margin-top: 62px;
+  margin-bottom: 62px; */
+  /* height: 550px; */
 }
 
 .newscard__item {
   margin: 0;
   padding: 0;
   width: 400px;
-  /* height: 576px; */
-  /* border: 1px solid blue; */
+  min-height: 550px;
   border-radius: 16px;
   overflow: hidden;
   background-color: #ffffff;

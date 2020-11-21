@@ -1,12 +1,69 @@
 .news-cardlist {
   background-color: #f5f6f7;
+  display: none;
 }
 
-.news-cardlist-gallery {
+.news-cardlist_state_enabled {
+  display: block;
+}
+
+.news-cardlist__title {
+  display: none;
+  margin: 0 auto;
+  padding: 85px 0 0 0;
+  max-width: 1232px;
+  font-family: "Robotoslab regular";
+  font-style: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+}
+
+.news-cardlist__title_state_enabled {
+  display: block;
+}
+
+.news-cardlist__gallery {
+  padding: 64px 0;
+  max-width: 1232px;
   margin: auto;
   position: relative;
   display: grid;
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.news-cardlist__button-wrapper {
   max-width: 1232px;
+  margin: auto;
+  padding-bottom: 80px;
+  display: flex;
+  
+
+}
+
+.news-cardlist__button-show-me-more {
+  margin: auto;
+  width: 288px;
+  height: 64px;
+  border-radius: 80px;
+  background-color: #ffffff;
+  color: #1a1b22;
+  font-family: "Roboto medium";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  border: none;
+  
+
+}
+
+.news-cardlist__button-show-me-more:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.news-cardlist__button-show-me-more:focus {
+  
 }

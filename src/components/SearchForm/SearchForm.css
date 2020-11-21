@@ -23,14 +23,12 @@
   display: flex;
   justify-content: space-between;
   width: 608px;
-  /* height: 64px; */
 }
 
 .search__form-info {
   border: none;
   margin: 0;
   padding: 0;
-
   width: 73%;
 }
 
@@ -50,6 +48,14 @@
 }
 
 .search__error_visible {
+  display: block;
+  margin: 20px auto;
+  text-shadow: 1px 1px 2px #ffffff;
+  color: #ffffff;
+  text-align: center;
+  font-family: "Sourcesanspro regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .search__button {
@@ -73,4 +79,5 @@
 
 .search__button:focus {
   background-color: #2a65cc;
+  outline: none;
 }

@@ -11,14 +11,14 @@ class NewsApi {
     if (res.ok) {
       return res.json();
     } else {
-      console.log("Ошибка подключения к серверу");
-      return Promise.reject(res.statusText);
+      console.log(res.status);
+      return Promise.reject(res.status);
     }
   }
 
   _handleResponseError(err) {
-    console.log("Ошибка подключения к серверу");
-    return Promise.reject(err.message);
+    console.log(err);
+    return Promise.reject(err);
   }
 
   getNewsCards() {
