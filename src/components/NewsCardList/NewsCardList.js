@@ -8,7 +8,6 @@ function NewsCardList(props) {
   const cards = props.newsCards;
   let location = useLocation();
 
-
   return (
     <section
       className={`news-cardlist ${
@@ -32,12 +31,14 @@ function NewsCardList(props) {
             })
             .slice(0, props.showItems)
         )}
-
       </div>
       <div className="news-cardlist__button-wrapper">
         <button
           type="button"
-          className="news-cardlist__button-show-me-more"
+          className={`news-cardlist__button-show-me-more ${
+            props.totalResult > 3 &&
+            "news-cardlist__button-show-me-more_state_enabled"
+          }`}
           onClick={props.handleShowMeMore}
         >
           Показать еще

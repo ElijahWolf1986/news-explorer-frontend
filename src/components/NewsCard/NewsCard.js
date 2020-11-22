@@ -23,6 +23,9 @@ function NewsCard(props) {
     }
   }
 
+  function handleClickDelete() {
+  }
+
   return (
     <section className="newscard">
       <div className="newscard__item">
@@ -39,7 +42,7 @@ function NewsCard(props) {
             className={`newscard__delete-button ${
               location.pathname === "/saved-news" &&
               "newscard__delete-button_status_enabled"
-            }`}
+            }`} onClick={handleClickDelete}
           ></button>
           <button
             className={`newscard__save-button ${

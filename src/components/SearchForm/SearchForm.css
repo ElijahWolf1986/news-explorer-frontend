@@ -3,7 +3,7 @@
 
 .search__title {
   max-width: 608px;
-  font-family: "Robotoslab regular";
+  font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
   font-size: 60px;
   line-height: 64px;
   color: #fff;
@@ -11,7 +11,7 @@
 
 .search__subtitle {
   max-width: 545px;
-  font-family: "Roboto regular";
+  font-family: "Roboto regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 24px;
   color: #fff;
@@ -67,7 +67,7 @@
   border: 1px solid #2f71e5;
   backdrop-filter: blur(8px);
   color: #fff;
-  font-family: "Roboto medium";
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 24px;
 }

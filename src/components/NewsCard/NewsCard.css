@@ -1,7 +1,5 @@
 .newscard {
-  /* margin-top: 62px;
-  margin-bottom: 62px; */
-  /* height: 550px; */
+  margin: auto;
 }
 
 .newscard__item {
@@ -38,7 +36,7 @@
   margin: 0;
   padding: 0 10px;
   vertical-align: middle;
-  font-family: "Roboto medium";
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 14px;
   line-height: 24px;
@@ -85,7 +83,7 @@
   right: 45px;
   min-width: 160px;
   min-height: 40px;
-  font-family: "Roboto medium";
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -149,7 +147,7 @@
   right: 45px;
   min-width: 160px;
   min-height: 40px;
-  font-family: "Roboto medium";
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 10px;
@@ -171,7 +169,7 @@
 }
 
 .newscard__data {
-  font-family: "Sourcesanspro regular";
+  font-family: "Sourcesanspro regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 18px;
   line-height: 24px;
@@ -186,7 +184,7 @@
 .newscard__title {
   max-height: 60px;
   margin: 12px 0 16px 0;
-  font-family: "Robotoslab regular";
+  font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 26px;
   line-height: 30px;
@@ -200,7 +198,7 @@
 .newscard__paragraph {
   max-height: 110px;
   margin: 0 0 18px 0;
-  font-family: "Roboto regular";
+  font-family: "Roboto regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 16px;
   line-height: 22px;
@@ -212,7 +210,7 @@
 }
 
 .newscard__author {
-  font-family: "Robotoslab regular";
+  font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 16px;
   line-height: 20px;

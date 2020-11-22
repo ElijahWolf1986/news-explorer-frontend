@@ -17,8 +17,11 @@ function Main(props) {
   const [isSearchResult, setIsSearchResult] = React.useState(false);
   const [showItems, setshowItems] = React.useState(3);
 
+
+
   function handleShowMeMore() {
     setshowItems(showItems + 3);
+    setTotalResult(totalResult - 3);
   }
 
   function handleUpdateKeyword(onUpdateKeyword) {

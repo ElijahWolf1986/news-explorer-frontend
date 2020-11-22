@@ -3,7 +3,7 @@
 }
 
 .saved-news-header__title {
-  font-family: "Roboto regular";
+  font-family: "Roboto regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 18px;
   line-height: 24px;
@@ -12,7 +12,7 @@
 
 .saved-news-header__statistic {
   margin: 28px 0 30px 0;
-  font-family: "Robotoslab regular";
+  font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 40px;
   line-height: 46px;
@@ -38,7 +38,7 @@
 .saved-news-header__keywords-paragraph {
   margin: 0;
   padding: 0;
-  font-family: "Roboto regular";
+  font-family: "Roboto regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 18px;
   line-height: 24px;
@@ -48,7 +48,7 @@
 .saved-news-header__keywords-result {
   margin: 0 0 0 10px;
   padding: 0;
-  font-family: "Roboto black";
+  font-family: "Roboto black", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 18px;
   line-height: 24px;

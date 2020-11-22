@@ -9,6 +9,7 @@
 }
 
 .nav__link {
+  display: none;
   text-decoration: none;
   font-family: inherit;
   font-style: normal;
@@ -19,7 +20,6 @@
   color: inherit;
   margin-left: 34px;
   height: 80px;
-  display: flex;
   align-items: center;
 }
 
@@ -32,8 +32,8 @@
   cursor: pointer;
 }
 
-.nav__link_status_disable {
-  display: none;
+.nav__link_state_enabled {
+  display: flex;
 }
 
 .nav__log-button {
