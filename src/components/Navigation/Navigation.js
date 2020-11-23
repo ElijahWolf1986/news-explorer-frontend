@@ -16,6 +16,7 @@ function Navigation(props) {
     // history.push("/signin");
     if (!authState) {
       setAuthState(true);
+      props.onOpenLogin(true);
     } else {
       setAuthState(false);
       history.push("/");

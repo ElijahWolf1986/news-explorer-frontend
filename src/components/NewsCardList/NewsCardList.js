@@ -1,8 +1,7 @@
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
 import NotFound from "../NotFound/NotFound";
-import Preloader from "../Preloader/Preloader";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function NewsCardList(props) {
   const cards = props.newsCards;

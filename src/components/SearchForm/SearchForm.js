@@ -4,10 +4,9 @@ function SearchForm(props) {
   const [keyword, setKeyword] = React.useState("");
   const [errMessage, setErrMessage] = React.useState("");
 
-
   function handleChangeKeyword(evt) {
     setKeyword(evt.target.value);
-    setErrMessage('');
+    setErrMessage("");
   }
 
   const resetForm = () => {
@@ -17,7 +16,9 @@ function SearchForm(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
     if (!keyword) {
-      return setErrMessage("Поиск по пустому полю - плохая идея! Так можно сломать интернет!");
+      return setErrMessage(
+        "Поиск по пустому полю - плохая идея! Так можно сломать интернет!"
+      );
     }
     props.onUpdateKeyword(keyword);
     resetForm();

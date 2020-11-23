@@ -139,7 +139,7 @@
   background-image: url("../../images/icon/save-active.svg");
 }
 
-.newscard__save-button_status_loggedout:hover::after {
+.newscard__save-button_status_enabled:hover::after {
   border: none;
   content: "Войдите, чтобы сохранять статьи";
   position: absolute;

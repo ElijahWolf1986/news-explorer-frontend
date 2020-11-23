@@ -3,12 +3,11 @@ import About from "../About/About";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import NewsApi from "../../utils/NewsApi";
-import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
 import { url, update, size, apiKey } from "../../utils/Utils";
 import ErrorNewsApi from "../Errors/ErrorsNewsApi/ErrorNewsApi";
 
-function Main(props) {
+function Main() {
   const [newsCards, setNewsCards] = React.useState([]);
   const [totalResult, setTotalResult] = React.useState(undefined);
   const [isPreloader, setIsPreloader] = React.useState(false);

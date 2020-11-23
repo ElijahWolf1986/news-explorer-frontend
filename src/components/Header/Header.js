@@ -17,7 +17,7 @@ function Header(props) {
       <h1 className="header__title" onClick={turnToMain}>
         NewsExplorer
       </h1>
-      <Navigation loggedIn={props.loggedIn} />
+      <Navigation loggedIn={props.loggedIn} onOpenLogin={props.onOpenLogin} />
     </header>
   );
 }
