@@ -35,8 +35,10 @@
 
 @media screen and (max-width: 550px) {
   .popup__container {
-    width: 90%;
-    margin-left: -45%;
+    top: 56px;
+    width: 100%;
+    margin-left: -50%;
+    height: 100%;
   }
 }
 
@@ -65,13 +67,10 @@
 
 @media screen and (max-width: 550px) {
   .popup__close-icon {
-    width: 27.55px;
-    height: 27.55px;
-    top: 5px;
-    right: 5px;
-    border: 2px solid #000;
-    border-radius: 50%;
-    background-color: #000;
+    width: 24px;
+    height: 24px;
+    top: -40.5px;
+    right: 16px;
   }
 }
 
@@ -125,9 +124,7 @@
   color: #ff0000;
   text-align: center;
   width: 100%;
-  /* border: 1px solid red; */
   display: flex;
-  /* margin: 0; */
   justify-content: center;
 }
 

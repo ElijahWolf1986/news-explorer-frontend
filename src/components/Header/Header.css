@@ -1,13 +1,19 @@
 .header {
-  width: 1440px;
-  height: 80px;
-  border: 1px solid rgba(196, 196, 196, 0.01);
+  max-width: 1440px;
+  width: 100%;
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   position: absolute;
+  top: 0;
+  left: 0;
   color: #ffffff;
+}
+
+.header__components {
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 7.25%;
 }
 
 .header_status_account {
@@ -16,7 +22,6 @@
 }
 
 .header__title {
-  margin-left: 104px;
   font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -26,4 +31,23 @@
 
 .header__title:hover {
   cursor: pointer;
+}
+
+@media screen and (min-width: 680px) and (max-width: 1024px) {
+  .header__components {
+    margin: 0 5.25%;
+  }
+  .header__components {
+    height: 66px;
+  }
+}
+
+@media screen and (min-width: 220px) and (max-width: 679px) {
+  .header__components {
+    margin: 0 5.25%;
+  }
+
+  .header__components {
+    height: 56px;
+  }
 }

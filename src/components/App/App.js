@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Router, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -8,6 +8,7 @@ import SavedNews from "../SavedNews/SavedNews";
 import Login from "../Login";
 import Register from "../Register";
 import InfoTooltip from "../InfoTooltip";
+import PopupMenu from "../PopupMenu/PopupMenu";
 
 function App() {
   const history = useHistory();
@@ -16,63 +17,77 @@ function App() {
   const [isResetForm, setIsResetForm] = React.useState(false);
   const [isOpenRegister, setIsOpenRegister] = React.useState(false);
   const [isOpenPopupInfo, setIsOpenPopupInfo] = React.useState(false);
-  const [errorServerMessage, setErrorServerMessage] = React.useState('');
-
-
+  const [isOpenPopupMenu, setIsOpenPopupMenu] = React.useState(false);
+  const [errorServerMessage, setErrorServerMessage] = React.useState("");
 
   function closeAllPopups() {
     setIsOpenLogin(false);
     setIsOpenRegister(false);
     setIsOpenPopupInfo(false);
     setIsResetForm(true);
+    setIsOpenPopupMenu(false);
   }
 
   const handleLogin = (email, password) => {
     //тут будет обработака запроса авторизации
-    setErrorServerMessage("Удача, но apiAuth еще не подключен :)")
+    setErrorServerMessage("Удача, но apiAuth еще не подключен :)");
     setTimeout(() => {
-      setErrorServerMessage("")
+      setErrorServerMessage("");
     }, 2000);
-  }
+  };
 
   const handleRegister = (email, password, name) => {
     //тут будет обработака запроса на регистрацию
-    setErrorServerMessage("Удача, но apiAuth еще не подключен :)")
+    setErrorServerMessage("Удача, но apiAuth еще не подключен :)");
     setIsOpenPopupInfo(true);
     setIsOpenRegister(false);
-  }
+  };
 
   function handleOpenLogin() {
     setIsOpenLogin(true);
     setErrorServerMessage("");
   }
 
+  function handleOpenPopupMenu() {
+    setIsOpenPopupMenu(true);
+  }
+
+  function handleClosePopupMenu() {
+    setIsOpenPopupMenu(false);
+  }
+
   function handleRedirect(evt) {
     evt.preventDefault();
     if (isOpenPopupInfo) {
-        setIsOpenLogin(true);
-        setIsOpenPopupInfo(false);
-        setErrorServerMessage("");
-    } 
-    else
-    {
-       if (isOpenLogin) {
+      setIsOpenLogin(true);
+      setIsOpenPopupInfo(false);
+      setErrorServerMessage("");
+    } else {
+      if (isOpenLogin) {
         setIsOpenLogin(false);
         setIsOpenRegister(true);
         setErrorServerMessage("");
-       } 
-         else {
-              setIsOpenLogin(true);
-              setIsOpenRegister(false);
-              setErrorServerMessage("");
-          }
+      } else {
+        setIsOpenLogin(true);
+        setIsOpenRegister(false);
+        setErrorServerMessage("");
       }
+    }
   }
 
   return (
     <Router history={history}>
       <div className="page">
-        <Header loggedIn={loggedIn} onOpenLogin={handleOpenLogin} />
+        <Header
+          loggedIn={loggedIn}
+          onOpenLogin={handleOpenLogin}
+          onClose={closeAllPopups}
+          onOpenPopupMenu={handleOpenPopupMenu}
+          isOpenPopupMenu={isOpenPopupMenu}
+          isOpenLogin={isOpenLogin}
+          isOpenRegister={isOpenRegister}
+          isOpenPopupInfo={isOpenPopupInfo}
+        />
         <Switch>
           <Route exact path="/">
             <Main />
@@ -81,9 +96,39 @@ function App() {
             <SavedNews />
           </Route>
         </Switch>
-        <Login isOpen={isOpenLogin} onResetForm={isResetForm} onClose={closeAllPopups} onLogin={handleLogin} onServerErrorMessage={errorServerMessage} redirect={handleRedirect}/>
-        <Register isOpen={isOpenRegister} onResetForm={isResetForm} onClose={closeAllPopups} onRegister={handleRegister} onServerErrorMessage={errorServerMessage} redirect={handleRedirect}/>
-        <InfoTooltip isOpen={isOpenPopupInfo} onClose={closeAllPopups} redirect={handleRedirect} />
+        <Login
+          isOpen={isOpenLogin}
+          onResetForm={isResetForm}
+          onClose={closeAllPopups}
+          onLogin={handleLogin}
+          onServerErrorMessage={errorServerMessage}
+          redirect={handleRedirect}
+        />
+        <Register
+          isOpen={isOpenRegister}
+          onResetForm={isResetForm}
+          onClose={closeAllPopups}
+          onRegister={handleRegister}
+          onServerErrorMessage={errorServerMessage}
+          redirect={handleRedirect}
+        />
+
+        <PopupMenu
+          isOpenPopupMenu={isOpenPopupMenu}
+          onClose={closeAllPopups}
+          loggedIn={loggedIn}
+          onOpenLogin={handleOpenLogin}
+          onOpenPopupMenu={handleOpenPopupMenu}
+          onClosePopupMenu={handleClosePopupMenu}
+          isOpenPopupMenu={isOpenPopupMenu}
+          //  onOpenPopupInfo={props.onOpenPopupInfo}
+        />
+
+        <InfoTooltip
+          isOpen={isOpenPopupInfo}
+          onClose={closeAllPopups}
+          redirect={handleRedirect}
+        />
         <Footer />
       </div>
     </Router>

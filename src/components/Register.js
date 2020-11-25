@@ -33,45 +33,6 @@ function Register(props) {
             if (!handleValidationTextInputRequired(name))  setErrMessageName("Поле Имя обязательно для заполнения");
             return
         }
-        
-        // if (!handleValidationEmail(email) && handleValidationPassword(password) && handleValidationTextInputRequired(name)) {
-        //   setErrMessageEmail("Неправильный формат email");
-        //   setErrMessagePassword("Пароль введен неверно");
-        //   setErrMessageName("Поле Имя обязательно для заполнения")
-        //   return;
-        // }
-        // if (!handleValidationEmail(email) && !handleValidationPassword(password) && !handleValidationTextInputRequired(name) ) {
-        //   setErrMessageEmail("Неправильный формат email");
-        //   return;
-        // }
-        // if (handleValidationEmail(email) && handleValidationPassword(password) && handleValidationTextInputRequired(name) ) {
-        //   setErrMessageEmail("");
-        //   setErrMessagePassword("Пароль введен неверно");
-        //   setErrMessageName("Поле Имя обязательно для заполнения")
-        //   return;
-        // }
-        // if (handleValidationEmail(email) && !handleValidationPassword(password) && handleValidationTextInputRequired(name) ) {
-        //     setErrMessageEmail("");
-        //     setErrMessagePassword("");
-        //     setErrMessageName("Поле Имя обязательно для заполнения")
-        //     return;
-        //   }
-        //   if (handleValidationEmail(email) && handleValidationPassword(password) && !handleValidationTextInputRequired(name) ) {
-        //     setErrMessageEmail("");
-        //     setErrMessagePassword("Пароль введен неверно");
-        //     setErrMessageName("")
-        //     return;
-        //   }
-    
-        // if (handleValidationEmail(email) && !handleValidationPassword(password) && handleValidationTextInputRequired(name) ) {
-        //     setErrMessageEmail("");
-        //     setErrMessagePassword("");
-        //     setErrMessageName("Поле Имя обязательно для заполнения")
-        //     return;
-        // }
-
-        // props.onRegister(email, password, name);
-        // resetForm();
       };
     
       const handleChangeEmail = (evt) => {

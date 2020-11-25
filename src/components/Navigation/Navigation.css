@@ -1,9 +1,7 @@
 .nav__links {
   list-style: none;
   padding: 0;
-  margin: 0;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
@@ -44,7 +42,6 @@
   height: 48px;
   border: 1px solid;
   color: inherit;
-  margin-right: 104px;
   margin-left: 32px;
   font-family: inherit;
   font-style: normal;
@@ -76,4 +73,34 @@
 
 .nav__svg_state_active {
   display: block;
+}
+
+@media screen and (max-width: 679px) {
+  .nav__links {
+    display: none;
+  }
+
+  .nav__toogle-menu {
+    width: 24px;
+    height: 24px;
+    background-image: url("../../images/icon/menu.svg");
+    display: flex;
+  }
+
+  .nav__toogle-menu_state_hidden {
+    display: none;
+  }
+  .nav__toogle-menu:focus {
+    outline: none;
+  }
+
+  .nav__toogle-menu_state_white {
+    background-image: url("../../images/icon/menu-white.svg");
+  }
+}
+
+@media screen and (min-width: 680px) and (max-width: 1024px) {
+  .nav__link {
+    height: 66px;
+  }
 }

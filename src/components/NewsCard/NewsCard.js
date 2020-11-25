@@ -1,6 +1,6 @@
 import React from "react";
 import noPhoto from "../../images/card/no-foto.png";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 
 function NewsCard(props) {
   let location = useLocation();
@@ -23,8 +23,7 @@ function NewsCard(props) {
     }
   }
 
-  function handleClickDelete() {
-  }
+  function handleClickDelete() {}
 
   return (
     <section className="newscard">
@@ -42,15 +41,18 @@ function NewsCard(props) {
             className={`newscard__delete-button ${
               location.pathname === "/saved-news" &&
               "newscard__delete-button_status_enabled"
-            }`} onClick={handleClickDelete}
+            }`}
+            onClick={handleClickDelete}
           ></button>
+
           <button
             className={`newscard__save-button ${
               location.pathname === "/" &&
-              "newscard__save-button_status_enabled"
+              "newscard__save-button_status_enabled "
             } ${isSaved && "newscard__save-button_status_saved"}`}
             onClick={handleSaveButton}
           ></button>
+
           <img
             src={card.urlToImage ? card.urlToImage : noPhoto}
             alt={card.title}
@@ -58,12 +60,12 @@ function NewsCard(props) {
           />
         </div>
 
-        <div className="newscard__info">
+        <a href={card.url} target="new" className="newscard__info">
           <p className="newscard__data">{date}</p>
           <h3 className="newscard__title">{card.title}</h3>
           <p className="newscard__paragraph">{card.description}</p>
           <p className="newscard__author">{card.source.name}</p>
-        </div>
+        </a>
       </div>
     </section>
   );

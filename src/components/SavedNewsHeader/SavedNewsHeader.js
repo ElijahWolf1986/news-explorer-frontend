@@ -14,9 +14,9 @@ function SavedNewsHeader(props) {
         <p className="saved-news-header__keywords-paragraph">
           По ключевым словам:
         </p>
-        <p className="saved-news-header__keywords-result">
-          Природа, Цветы и 2-м другим
-        </p>
+        <p className="saved-news-header__keywords-result">Природа</p>
+        <p className="saved-news-header__keywords-result">Цветы</p>
+        <p className="saved-news-header__keywords-result">и 2-м другим</p>
       </div>
     </div>
   );

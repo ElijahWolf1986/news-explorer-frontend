@@ -1,13 +1,13 @@
 .about {
   margin: auto;
-  padding: 100px 0;
+  padding: 100px 104px;
   max-width: 1440px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .about__author-photo {
-  margin-left: 104px;
   width: 464px;
   height: 464px;
   border-radius: 50%;
@@ -38,4 +38,35 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;
+}
+
+@media screen and (min-width: 426px) and (max-width: 1024px) {
+  .about {
+    padding: 0 40px 32px 40px;
+  }
+  .about__author-photo {
+    width: 232px;
+    height: 232px;
+  }
+
+  .about__title {
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .about {
+    padding: 32px 24px;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .about__info {
+    margin: 24px 0;
+  }
+  .about__author-photo {
+    width: 272px;
+    height: 272px;
+  }
 }

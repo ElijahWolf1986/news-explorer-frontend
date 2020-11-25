@@ -16,8 +16,6 @@ function Main() {
   const [isSearchResult, setIsSearchResult] = React.useState(false);
   const [showItems, setshowItems] = React.useState(3);
 
-
-
   function handleShowMeMore() {
     setshowItems(showItems + 3);
     setTotalResult(totalResult - 3);
@@ -58,7 +56,13 @@ function Main() {
       </main>
       <Preloader isPreloader={isPreloader} />
       <ErrorNewsApi isErrorServer={isErrorServer} errorMessage={errorMessage} />
-      <NewsCardList newsCards={newsCards} totalResult={totalResult} isSearchResult={isSearchResult} showItems={showItems} handleShowMeMore={handleShowMeMore} />
+      <NewsCardList
+        newsCards={newsCards}
+        totalResult={totalResult}
+        isSearchResult={isSearchResult}
+        showItems={showItems}
+        handleShowMeMore={handleShowMeMore}
+      />
       <About />
     </div>
   );
