@@ -1,0 +1,251 @@
+.newscard {
+  margin: auto;
+  width: 100%;
+}
+
+.newscard__item {
+  margin: auto;
+  padding: 0;
+  max-width: 400px;
+  min-width: 224px;
+  min-height: 550px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.newscard__header {
+  position: relative;
+}
+
+.newscard__keyword {
+  display: none;
+  color: black;
+  position: absolute;
+  border-radius: 10px;
+  background-color: #ffffff;
+  top: 24px;
+  left: 24px;
+  border: none;
+  min-height: 40px;
+  max-width: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0 10px;
+  vertical-align: middle;
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.newscard__keyword_status_enabled {
+  display: block;
+}
+
+.newscard__keyword:focus {
+  outline: none;
+}
+
+.newscard__delete-button {
+  display: none;
+  position: absolute;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 10px;
+  background-image: url("../../images/icon/trash.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-color: #ffffff;
+  background-position: center;
+  border: none;
+  top: 24px;
+  right: 24px;
+}
+
+.newscard__delete-button_status_enabled {
+  display: block;
+}
+
+.newscard__delete-button:hover {
+  cursor: pointer;
+  background-image: url("../../images/icon/trash-hover.svg");
+}
+
+.newscard__delete-button:hover::after {
+  border: none;
+  content: "Убрать из сохраненных";
+  position: absolute;
+  top: 0px;
+  right: 45px;
+  min-width: 160px;
+  min-height: 40px;
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 0 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.newscard__delete-button:focus {
+  outline: none;
+}
+
+.newscard__save-button {
+  display: none;
+  position: absolute;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 10px;
+  background-image: url("../../images/icon/save.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-color: #ffffff;
+  background-position: center;
+  border: none;
+  top: 24px;
+  right: 24px;
+}
+
+.newscard__save-button_status_enabled {
+  display: block;
+}
+
+.newscard__save-button:hover {
+  cursor: pointer;
+  background-image: url("../../images/icon/save-hover.svg");
+}
+
+.newscard__save-button:focus {
+  outline: none;
+}
+
+.newscard__save-button_status_saved {
+  background-image: url("../../images/icon/save-active.svg");
+}
+
+.newscard__save-button_status_saved:hover {
+  background-image: url("../../images/icon/save-active.svg");
+}
+
+.newscard__save-button_status_enabled:hover::after {
+  border: none;
+  content: "Войдите, чтобы сохранять статьи";
+  position: absolute;
+  top: 0px;
+  right: 45px;
+  min-width: 160px;
+  min-height: 40px;
+  font-family: "Roboto medium", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 0 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.newscard__img {
+  width: 100%;
+  height: 272px;
+  object-fit: ашдд;
+}
+
+.newscard__data {
+  font-family: "Sourcesanspro regular", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  margin: 0;
+}
+
+.newscard__info {
+  margin: 20px 24px;
+  text-decoration: none;
+}
+
+.newscard__title {
+  max-height: 60px;
+  margin: 12px 0 16px 0;
+  font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1a1b22;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.newscard__paragraph {
+  max-height: 110px;
+  margin: 0 0 18px 0;
+  font-family: "Roboto regular", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1a1b22;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.newscard__author {
+  font-family: "Robotoslab regular", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #b6bcbf;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 489px) and (max-width: 1024px) {
+  .newscard__img {
+    height: 200px;
+  }
+  .newscard__title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+  .newscard__paragraph {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .newscard__item {
+    min-height: 460px;
+  }
+}
+
+@media screen and (max-width: 488px) {
+  .newscard__img {
+    height: 196px;
+  }
+  .newscard__item {
+    min-height: 460px;
+  }
+}
