@@ -6,9 +6,6 @@ function PopupMenu(props) {
   const turnToMain = () => {
     history.push("/");
   };
-  const turnToSavedNews = () => {
-    history.push("/saved-news");
-  };
 
   const handleLink = () => {
     props.onClosePopupMenu(false);

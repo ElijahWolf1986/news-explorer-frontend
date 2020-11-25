@@ -1,6 +1,20 @@
 import React from "react";
 
 function PopupWithForm(props) {
+  function closeByEsc(evt) {
+    if (evt.keyCode === 27) {
+      props.onClose();
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", closeByEsc, false);
+
+    return () => {
+      document.removeEventListener("keydown", closeByEsc, false);
+    };
+  }, []);
+
   return (
     <section className={`popup ${props.isOpen && "popup_state_opened"}`}>
       <div className="popup__overlay" onClick={props.onClose}>

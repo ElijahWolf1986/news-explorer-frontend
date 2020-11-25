@@ -120,8 +120,6 @@ function App() {
           onOpenLogin={handleOpenLogin}
           onOpenPopupMenu={handleOpenPopupMenu}
           onClosePopupMenu={handleClosePopupMenu}
-          isOpenPopupMenu={isOpenPopupMenu}
-          //  onOpenPopupInfo={props.onOpenPopupInfo}
         />
 
         <InfoTooltip
@@ -136,3 +134,4 @@ function App() {
 }
 
 export default App;
+ 

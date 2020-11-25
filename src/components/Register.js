@@ -6,11 +6,9 @@ function Register(props) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [name, setName] = React.useState("");
-
     const [errMessageEmail, setErrMessageEmail] = React.useState("");
     const [errMessagePassword, setErrMessagePassword] = React.useState("");
     const [errMessageName, setErrMessageName] = React.useState("");
-
     const [isButtonSaveDisabled, setButtonSaveDisabled] = React.useState(true);
 
     const resetForm = () => {
@@ -89,4 +87,4 @@ function Register(props) {
     )
 }
 
-export default Register;   
+export default Register;     

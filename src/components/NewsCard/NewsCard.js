@@ -1,10 +1,9 @@
 import React from "react";
 import noPhoto from "../../images/card/no-foto.png";
-import { useLocation, useHistory, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function NewsCard(props) {
   let location = useLocation();
-  const history = useHistory();
   const [isSaved, setIsSaved] = React.useState(false);
 
   const card = props.newsCard;
