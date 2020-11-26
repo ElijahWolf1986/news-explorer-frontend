@@ -1,0 +1,31 @@
+.error {
+  padding: 30px 0 30px 0;
+  background-color: #f5f6f7;
+  max-width: 1440px;
+  height: auto;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.error__img {
+  width: 350px;
+  height: 350px;
+  margin: 0;
+}
+
+.error__paragraph {
+  margin-top: 30px;
+  color: #b6bcbf;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.error_state_active {
+  display: flex;
+}
