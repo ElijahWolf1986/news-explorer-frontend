@@ -26,7 +26,8 @@ function NewsCardList(props) {
         ) : (
           cards
             .map((item, id) => {
-              return <NewsCard newsCard={item} key={id} />;
+              // console.log(item.url);
+              return <NewsCard newsCard={item} key={id} loggedIn={props.loggedIn} onSaveNewsArticle={props.onSaveNewsArticle} keyword={props.keyword} onDeleteArticles={props.onDeleteArticles} />;
             })
             .slice(0, props.showItems)
         )}
@@ -42,7 +43,7 @@ function NewsCardList(props) {
         >
           Показать еще
         </button>
-      </div>
+      </div> 
     </section>
   );
 }

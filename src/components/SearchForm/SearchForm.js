@@ -17,7 +17,7 @@ function SearchForm(props) {
     evt.preventDefault();
     if (!keyword) {
       return setErrMessage(
-        "Поиск по пустому полю - плохая идея! Так можно сломать интернет!"
+        "Нужно ввести ключевое слово"
       );
     }
     props.onUpdateKeyword(keyword);

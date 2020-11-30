@@ -16,14 +16,18 @@ function Login(props) {
         setErrMessagePassword("");
       };
     
-      const handleSubmit = (evt) => { //решает какую ошибку и где выводить пользователю при неверной валидации
+      const handleSubmit = (evt) => { 
+        //Функция отрабатывает при нажатии на кнопку сохранить в форме авторизации
+        //Валидирует инпуты через функции валидации и если все ок, то отправляет данные для входа (email, password) в компонент App.js
+        //где функция onLogin рпботает с MainApi -> авторизируется, получает токен и записывает его в localstorage
+        //а также, запрашивает данные о пользователе и устанавливает стэйты и вид кнопки
         evt.preventDefault();
         if (handleValidationEmail(email) && handleValidationPassword(password)) {
             props.onLogin(email, password);
             resetForm();
         } else {
             if (!handleValidationEmail(email))  setErrMessageEmail("Неправильный формат email");
-            if (!handleValidationPassword(password))  setErrMessagePassword("Пароль введен неверно");
+            if (!handleValidationPassword(password))  setErrMessagePassword("Пароль введен неверно"); 
             return
         }
       };
