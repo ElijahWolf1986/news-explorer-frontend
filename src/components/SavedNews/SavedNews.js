@@ -1,20 +1,22 @@
 import React from "react";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
-// import { testArticles } from "../../utils/ForTesting";
 
 function SavedNews(props) {
-  const [isSearchResult, setIsSearchResult] = React.useState(true);
-  console.log(props.savedNewsCards)
   return (
     <div className="savednews">
-      <SavedNewsHeader />
-      <NewsCardList newsCards={props.savedNewsCards} isSearchResult={isSearchResult}
-      onDeleteArticles={props.onDeleteArticles}
+      <SavedNewsHeader
+        userName={props.userName}
+        articlesNumber={props.savedNewsCards.length}
+        newsCards={props.savedNewsCards}
+      />
+      <NewsCardList
+        newsCards={props.savedNewsCards}
+        isSearchResult={true}
+        onDeleteArticles={props.onDeleteArticles}
       />
     </div>
   );
 }
 
 export default SavedNews;
- 

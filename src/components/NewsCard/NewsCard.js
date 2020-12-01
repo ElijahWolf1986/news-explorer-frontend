@@ -13,35 +13,20 @@ function NewsCard(props) {
     year: "numeric",
   });
 
-//  console.log(date);
-
   const cardDate = new Date(card.date).toLocaleString("ru", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-
-  function handleClickDelete() {
-    props
-      .onDeleteArticles(thisArticleId)
-      .then((data) => {
-        setIsCardSaved(false);
-        console.log(`Карта # ${thisArticleId} Удалена`);
-      })
-      .catch((err) => console.log(err.message));
-  }
-
-  function handleClickDelete2() {
+  function handleClickDeleteSavedArticle() {
     props
       .onDeleteArticles(card._id)
-      .then((data) => {
-        setIsCardSaved(false);
-        console.log(`Карта # ${card._id} Удалена`);
+      .then(() => {
+        // console.log(`Карта # ${card._id} Удалена`);
       })
       .catch((err) => console.log(err.message));
   }
-
 
   function handleSaveButton() {
     if (props.loggedIn) {
@@ -56,14 +41,21 @@ function NewsCard(props) {
             card.url,
             card.urlToImage
           )
-          .then((data) => {
-            setThisArticleId(data._id);
+          .then((newCard) => {
             setIsCardSaved(true);
-            console.log(`Карта # ${data._id} Сохранена`);
+            // console.log(`Карта # ${newCard._id} Сохранена`);
+            setThisArticleId(newCard._id);
+            props.getUsersArticles();
           })
           .catch((err) => console.log(err.message));
       } else {
-        // handleClickDelete();
+        props
+          .onDeleteArticles(thisArticleId)
+          .then(() => {
+            setIsCardSaved(false);
+            console.log(`Карта # ${thisArticleId} Удалена`);
+          })
+          .catch((err) => console.log(err.message));
       }
     }
   }
@@ -79,14 +71,13 @@ function NewsCard(props) {
             }`}
           >
             {card.keyword}
-
           </button>
           <button
             className={`newscard__delete-button ${
               location.pathname === "/saved-news" &&
               "newscard__delete-button_status_enabled"
             }`}
-            onClick={handleClickDelete2}
+            onClick={handleClickDeleteSavedArticle}
           ></button>
           <button
             className={`newscard__save-button ${
@@ -98,13 +89,19 @@ function NewsCard(props) {
             onClick={handleSaveButton}
           ></button>
           <img
-            src={card.urlToImage || card.image ? card.urlToImage || card.image : noPhoto}
+            src={
+              card.urlToImage || card.image
+                ? card.urlToImage || card.image
+                : noPhoto
+            }
             alt={card.title}
             className="newscard__img"
           />
         </div>
         <a href={card.url} target="new" className="newscard__info">
-          <p className="newscard__data">{date !== 'Invalid Date' ? date : cardDate}</p>
+          <p className="newscard__data">
+            {date !== "Invalid Date" ? date : cardDate}
+          </p>
           <h3 className="newscard__title">{card.title}</h3>
           <p className="newscard__paragraph">{card.description || card.text}</p>
           <p className="newscard__author">{card.source.name || card.source}</p>

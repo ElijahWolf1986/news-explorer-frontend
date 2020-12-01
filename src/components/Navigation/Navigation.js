@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 function Navigation(props) {
-  // const [authState, setAuthState] = React.useState(false); // временное решение для кнопеи авторизоваться
   let location = useLocation();
   const history = useHistory();
   const turnToMain = () => {
@@ -11,7 +10,7 @@ function Navigation(props) {
   const turnToSavedNews = () => {
     history.push("/saved-news");
   };
-  
+
   const signinButton = () => {
     //Клевая кнопка при залогиненном пользователе она очищает токен и переходит на /
     //а при незалогиненном она вызывает попап авторизации
@@ -19,6 +18,7 @@ function Navigation(props) {
       props.onOpenLogin(true);
     } else {
       props.onSignOut(true);
+      history.push("/");
     }
   };
 
@@ -39,13 +39,14 @@ function Navigation(props) {
         </li>
         <li
           onClick={turnToSavedNews}
-          className={`nav__link ${props.loggedIn && "nav__link_state_enabled"} ${
+          className={`nav__link ${
+            props.loggedIn && "nav__link_state_enabled"
+          } ${
             location.pathname === "/saved-news" && "nav__link_status_active"
           }`}
         >
           Сохраненные статьи
         </li>
-
 
         <button className="nav__log-button" onClick={signinButton}>
           {" "}

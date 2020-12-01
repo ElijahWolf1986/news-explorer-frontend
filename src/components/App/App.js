@@ -40,9 +40,8 @@ function App() {
   const [keyword, setKeyword] = React.useState("");
   //********************************** */
 
-  //Стейты для работы страницы SavedNews 
+  //Стейты для работы страницы SavedNews
   const [savedNewsCards, setSavedNewsCards] = React.useState([]);
-
 
   //********************************** */
 
@@ -56,20 +55,20 @@ function App() {
     const newsApi = new NewsApi(Url, onUpdateKeyword, Update, Size, ApiKey);
     setisErrorServer(false);
     setIsPreloader(true);
-    setTotalResult(undefined);
+    // setTotalResult(undefined);
     setNewsCards([]);
     setshowItems(3);
     setKeyword(onUpdateKeyword);
     localStorage.keyword = keyword;
-    // console.log(keyword);
     newsApi
       .getNewsCards()
       .then((res) => {
         setIsSearchResult(true);
         setTotalResult(res.totalResults);
+        localStorage.totalResult = res.totalResults;
         setNewsCards(res.articles);
+        localStorage.setItem("cards", JSON.stringify(res.articles));
         setIsPreloader(false);
-        // console.log(newsCards)
       })
       .catch((err) => {
         if (err === 429) {
@@ -100,6 +99,7 @@ function App() {
   function handleOpenLogin() {
     setIsOpenLogin(true);
     setErrorServerMessage("");
+    setIsOpenPopupMenu(false);
   }
 
   function handleOpenPopupMenu() {
@@ -133,14 +133,9 @@ function App() {
 
   function getUsersArticles() {
     let jwt = localStorage.getItem("jwt");
-    MainApi
-    .getArticles(jwt)
-    .then((res) => {
-      // console.log(res);
+    MainApi.getArticles(jwt).then((res) => {
       setSavedNewsCards(res.data);
-      // console.log(savedNewsCards);
-
-    })
+    });
   }
 
   //Функции для Авторизации и Регистрации и все что с этим связано
@@ -150,6 +145,12 @@ function App() {
     setLoggedIn(false);
     localStorage.loggedIn = loggedIn;
     setCurrentUser("");
+    setKeyword("");
+    localStorage.keyword = "";
+    localStorage.totalResult = 0;
+    localStorage.setItem("cards", JSON.stringify([]));
+    setIsSearchResult(false);
+    setIsOpenPopupMenu(false);
     history.push("/");
   }
 
@@ -172,7 +173,7 @@ function App() {
     if (jwt) {
       setLoggedIn(true);
       getUserInfo();
-      history.push("/");
+      getUsersArticles();
     }
   };
 
@@ -236,22 +237,29 @@ function App() {
       source,
       link,
       image
-    );
+    ).catch((err) => console.log(err.message));
   }
 
   function onDeleteArticles(articleId) {
     let jwt = localStorage.getItem("jwt");
-    return MainApi.deleteArticles(jwt, articleId);
+    return MainApi.deleteArticles(jwt, articleId).then(() => {
+      const delSavedArticles = savedNewsCards.filter(
+        (a) => a._id !== articleId
+      );
+      setSavedNewsCards(delSavedArticles);
+    });
   }
 
   //********************************** */
 
   React.useEffect(() => {
-    //Реализует функционал, когда пользователь случайно закрыл страницу или перезагрузил ее, то он при возврате все равно остается залогиненным
-    //до тех пор пока не воспользуется кнопкой логоут или не просрочится токен
     tokenCheck();
-    getUsersArticles()
-
+    setKeyword(localStorage.keyword);
+    if (localStorage.keyword) {
+      setIsSearchResult(true);
+    }
+    setNewsCards(JSON.parse(localStorage.getItem("cards")));
+    setTotalResult(localStorage.totalResult);
   }, []);
 
   return (
@@ -268,7 +276,7 @@ function App() {
           isOpenPopupInfo={isOpenPopupInfo}
           userName={currentUser}
           onSignOut={onSignOut}
-          keyword={keyword}
+          // keyword={keyword}
         />
 
         <Switch>
@@ -282,25 +290,32 @@ function App() {
               isErrorServer={isErrorServer}
               errorMessage={errorMessage}
               newsCards={newsCards}
+              setNewsCards={setNewsCards}
               totalResult={totalResult}
               isSearchResult={isSearchResult}
               showItems={showItems}
               handleShowMeMore={handleShowMeMore}
+              getUsersArticles={getUsersArticles}
               keyword={keyword}
+              setKeyword={setKeyword}
             />
           </Route>
 
           <CurrentUserContext.Provider value={currentUser}>
             <ProtectedRoute
+              exact
               path="/saved-news"
               loggedIn={loggedIn}
               savedNewsCards={savedNewsCards}
               keyword={keyword}
               onDeleteArticles={onDeleteArticles}
+              userName={currentUser}
               component={SavedNews}
+              onOpenLogin={handleOpenLogin}
             />
           </CurrentUserContext.Provider>
         </Switch>
+
         <Login
           isOpen={isOpenLogin}
           onResetForm={isResetForm}
@@ -325,6 +340,8 @@ function App() {
           onOpenLogin={handleOpenLogin}
           onOpenPopupMenu={handleOpenPopupMenu}
           onClosePopupMenu={handleClosePopupMenu}
+          userName={currentUser}
+          onSignOut={onSignOut}
         />
 
         <InfoTooltip

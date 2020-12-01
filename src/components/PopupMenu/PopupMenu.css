@@ -2,7 +2,9 @@
   display: none;
   position: fixed;
   width: 100%;
-  height: 286px;
+  /* height: 286px; */
+  height: auto;
+  padding-bottom: 30px;
   left: 0;
   top: -13px;
   background-color: #1a1b22;
@@ -34,6 +36,7 @@
 }
 
 .popup-menu__link {
+  display: none;
   text-decoration: none;
   font-family: "Roboto regular", Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -43,6 +46,10 @@
   text-align: center;
   color: #ffffff;
   align-items: center;
+}
+
+.popup-menu__link_status_enabled {
+  display: block;
 }
 
 .popup-menu__button {
@@ -61,6 +68,9 @@
   line-height: 24px;
   text-align: center;
   padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .popup-menu__wrapper {

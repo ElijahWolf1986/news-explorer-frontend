@@ -9,7 +9,11 @@ function Main(props) {
   return (
     <div className="main">
       <main className="main__cover">
-        <SearchForm onUpdateKeyword={props.onUpdateKeyword} />
+        <SearchForm
+          onUpdateKeyword={props.onUpdateKeyword}
+          keyword={props.keyword}
+          setKeyword={props.setKeyword}
+        />
       </main>
       <Preloader isPreloader={props.isPreloader} />
       <ErrorNewsApi
@@ -26,7 +30,9 @@ function Main(props) {
         handleShowMeMore={props.handleShowMeMore}
         onSaveNewsArticle={props.onSaveNewsArticle}
         onDeleteArticles={props.onDeleteArticles}
+        getUsersArticles={props.getUsersArticles}
         keyword={props.keyword}
+        setNewsCards={props.setNewsCards}
       />
       <About />
     </div>

@@ -29,7 +29,6 @@ function Header(props) {
           isOpenPopupInfo={props.isOpenPopupInfo}
           userName={props.userName}
           onSignOut={props.onSignOut}
-          // signInButton={props.signInButton}
         />
       </div>
     </header>
@@ -37,4 +36,3 @@ function Header(props) {
 }
 
 export default Header;
- 
