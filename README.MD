@@ -10,5 +10,3 @@
 ### Добавлено:
 Создан публичный репозиторий
 
-### Деплой:
-https://wolkov.students.nomoreparties.co/
