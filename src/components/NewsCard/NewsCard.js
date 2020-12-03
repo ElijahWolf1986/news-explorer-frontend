@@ -4,25 +4,61 @@ import { useLocation } from "react-router-dom";
 
 function NewsCard(props) {
   let location = useLocation();
-  const [isSaved, setIsSaved] = React.useState(false);
-
+  const [isCardSaved, setIsCardSaved] = React.useState(false);
+  const [thisArticleId, setThisArticleId] = React.useState("");
   const card = props.newsCard;
-
   const date = new Date(card.publishedAt).toLocaleString("ru", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  function handleSaveButton() {
-    if (!isSaved) {
-      setIsSaved(true);
-    } else {
-      setIsSaved(false);
-    }
+  const cardDate = new Date(card.date).toLocaleString("ru", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  function handleClickDeleteSavedArticle() {
+    props
+      .onDeleteArticles(card._id)
+      .then(() => {
+        // console.log(`Карта # ${card._id} Удалена`);
+      })
+      .catch((err) => console.log(err.message));
   }
 
-  function handleClickDelete() {}
+  function handleSaveButton() {
+    if (props.loggedIn) {
+      if (!isCardSaved) {
+        props
+          .onSaveNewsArticle(
+            props.keyword,
+            card.title,
+            card.description,
+            card.publishedAt,
+            card.source.name,
+            card.url,
+            card.urlToImage
+          )
+          .then((newCard) => {
+            setIsCardSaved(true);
+            // console.log(`Карта # ${newCard._id} Сохранена`);
+            setThisArticleId(newCard._id);
+            props.getUsersArticles();
+          })
+          .catch((err) => console.log(err.message));
+      } else {
+        props
+          .onDeleteArticles(thisArticleId)
+          .then(() => {
+            setIsCardSaved(false);
+            console.log(`Карта # ${thisArticleId} Удалена`);
+          })
+          .catch((err) => console.log(err.message));
+      }
+    }
+  }
 
   return (
     <section className="newscard">
@@ -34,36 +70,41 @@ function NewsCard(props) {
               "newscard__keyword_status_enabled"
             }`}
           >
-            Природа
+            {card.keyword}
           </button>
           <button
             className={`newscard__delete-button ${
               location.pathname === "/saved-news" &&
               "newscard__delete-button_status_enabled"
             }`}
-            onClick={handleClickDelete}
+            onClick={handleClickDeleteSavedArticle}
           ></button>
-
           <button
             className={`newscard__save-button ${
               location.pathname === "/" &&
               "newscard__save-button_status_enabled "
-            } ${isSaved && "newscard__save-button_status_saved"}`}
+            } ${isCardSaved && "newscard__save-button_status_saved"} ${
+              !props.loggedIn && "newscard__delete-button_state_logout"
+            }`}
             onClick={handleSaveButton}
           ></button>
-
           <img
-            src={card.urlToImage ? card.urlToImage : noPhoto}
+            src={
+              card.urlToImage || card.image
+                ? card.urlToImage || card.image
+                : noPhoto
+            }
             alt={card.title}
             className="newscard__img"
           />
         </div>
-
         <a href={card.url} target="new" className="newscard__info">
-          <p className="newscard__data">{date}</p>
+          <p className="newscard__data">
+            {date !== "Invalid Date" ? date : cardDate}
+          </p>
           <h3 className="newscard__title">{card.title}</h3>
-          <p className="newscard__paragraph">{card.description}</p>
-          <p className="newscard__author">{card.source.name}</p>
+          <p className="newscard__paragraph">{card.description || card.text}</p>
+          <p className="newscard__author">{card.source.name || card.source}</p>
         </a>
       </div>
     </section>

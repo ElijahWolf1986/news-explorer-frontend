@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 function Navigation(props) {
-  const [authState, setAuthState] = React.useState(false); // временное решение для кнопеи авторизоваться
   let location = useLocation();
   const history = useHistory();
   const turnToMain = () => {
@@ -11,14 +10,14 @@ function Navigation(props) {
   const turnToSavedNews = () => {
     history.push("/saved-news");
   };
+
   const signinButton = () => {
-    // временное решение для кнопеи авторизоваться, для просмотра сверстанных вариантов
-    // history.push("/signin");
-    if (!authState) {
-      setAuthState(true);
+    //Клевая кнопка при залогиненном пользователе она очищает токен и переходит на /
+    //а при незалогиненном она вызывает попап авторизации
+    if (!props.loggedIn) {
       props.onOpenLogin(true);
     } else {
-      setAuthState(false);
+      props.onSignOut(true);
       history.push("/");
     }
   };
@@ -40,17 +39,20 @@ function Navigation(props) {
         </li>
         <li
           onClick={turnToSavedNews}
-          className={`nav__link ${authState && "nav__link_state_enabled"} ${
+          className={`nav__link ${
+            props.loggedIn && "nav__link_state_enabled"
+          } ${
             location.pathname === "/saved-news" && "nav__link_status_active"
           }`}
         >
           Сохраненные статьи
         </li>
+
         <button className="nav__log-button" onClick={signinButton}>
           {" "}
-          {authState ? "Грета" : "Авторизоваться"}
+          {props.loggedIn ? props.userName : "Авторизоваться"}
           <svg
-            className={`nav__svg ${authState && "nav__svg_state_active"}`}
+            className={`nav__svg ${props.loggedIn && "nav__svg_state_active"}`}
             width="24"
             height="24"
             viewBox="0 0 24 24"

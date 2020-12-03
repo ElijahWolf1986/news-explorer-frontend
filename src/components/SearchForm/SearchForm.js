@@ -1,27 +1,19 @@
 import React from "react";
 
 function SearchForm(props) {
-  const [keyword, setKeyword] = React.useState("");
   const [errMessage, setErrMessage] = React.useState("");
 
   function handleChangeKeyword(evt) {
-    setKeyword(evt.target.value);
+    props.setKeyword(evt.target.value);
     setErrMessage("");
   }
 
-  const resetForm = () => {
-    setKeyword("");
-  };
-
   function handleSubmit(evt) {
     evt.preventDefault();
-    if (!keyword) {
-      return setErrMessage(
-        "Поиск по пустому полю - плохая идея! Так можно сломать интернет!"
-      );
+    if (!props.keyword) {
+      return setErrMessage("Нужно ввести ключевое слово");
     }
-    props.onUpdateKeyword(keyword);
-    resetForm();
+    props.onUpdateKeyword(props.keyword);
   }
 
   return (
@@ -41,7 +33,7 @@ function SearchForm(props) {
           <input
             type="text"
             name="search"
-            value={keyword || ""}
+            value={props.keyword || ""}
             onChange={handleChangeKeyword}
             required
             placeholder="Введите тему новостей"

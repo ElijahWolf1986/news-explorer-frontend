@@ -27,6 +27,8 @@ function Header(props) {
           isOpenRegister={props.isOpenRegister}
           isOpenLogin={props.isOpenLogin}
           isOpenPopupInfo={props.isOpenPopupInfo}
+          userName={props.userName}
+          onSignOut={props.onSignOut}
         />
       </div>
     </header>

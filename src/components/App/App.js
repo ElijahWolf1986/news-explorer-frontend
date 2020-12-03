@@ -1,6 +1,8 @@
 import React from "react";
 import { Router, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -9,16 +11,82 @@ import Login from "../Login";
 import Register from "../Register";
 import InfoTooltip from "../InfoTooltip";
 import PopupMenu from "../PopupMenu/PopupMenu";
+import * as MainApi from "../../utils/MainApi";
+import { Url, Update, Size, ApiKey } from "../../utils/Utils";
+import NewsApi from "../../utils/NewsApi";
 
 function App() {
   const history = useHistory();
-  const [loggedIn, setLoggedIn] = React.useState(true); //временно тру для тестирования верстки без api auth
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState("");
+
+  //Стейты для работы popup-ов
   const [isOpenLogin, setIsOpenLogin] = React.useState(false);
   const [isResetForm, setIsResetForm] = React.useState(false);
   const [isOpenRegister, setIsOpenRegister] = React.useState(false);
   const [isOpenPopupInfo, setIsOpenPopupInfo] = React.useState(false);
   const [isOpenPopupMenu, setIsOpenPopupMenu] = React.useState(false);
-  const [errorServerMessage, setErrorServerMessage] = React.useState("");
+  const [errorServerMessage, setErrorServerMessage] = React.useState(""); //ошибка после ответа сервера
+  //********************************** */
+
+  //Стейты для работы страницы Main и NewsApi
+  const [newsCards, setNewsCards] = React.useState([]);
+  const [totalResult, setTotalResult] = React.useState(undefined);
+  const [isPreloader, setIsPreloader] = React.useState(false);
+  const [isErrorServer, setisErrorServer] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [isSearchResult, setIsSearchResult] = React.useState(false);
+  const [showItems, setshowItems] = React.useState(3);
+  const [keyword, setKeyword] = React.useState("");
+  //********************************** */
+
+  //Стейты для работы страницы SavedNews
+  const [savedNewsCards, setSavedNewsCards] = React.useState([]);
+
+  //********************************** */
+
+  //Функции для работы страницы Main и NewsApi
+  function handleShowMeMore() {
+    setshowItems(showItems + 3);
+    setTotalResult(totalResult - 3);
+  }
+
+  function handleUpdateKeyword(onUpdateKeyword) {
+    const newsApi = new NewsApi(Url, onUpdateKeyword, Update, Size, ApiKey);
+    setisErrorServer(false);
+    setIsPreloader(true);
+    // setTotalResult(undefined);
+    setNewsCards([]);
+    setshowItems(3);
+    setKeyword(onUpdateKeyword);
+    localStorage.keyword = keyword;
+    newsApi
+      .getNewsCards()
+      .then((res) => {
+        setIsSearchResult(true);
+        setTotalResult(res.totalResults);
+        localStorage.totalResult = res.totalResults;
+        setNewsCards(res.articles);
+        localStorage.setItem("cards", JSON.stringify(res.articles));
+        setIsPreloader(false);
+      })
+      .catch((err) => {
+        if (err === 429) {
+          setIsPreloader(false);
+          setErrorMessage(
+            `Статус ${err} Слишком много запросов для бесплатной версии доступно 50 шт каждые 12 часов`
+          );
+          setisErrorServer(true);
+        } else {
+          setErrorMessage(
+            `Статус ${err} Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен`
+          );
+        }
+      });
+  }
+  //********************************** */
+
+  //Функции для работы popup-ов
 
   function closeAllPopups() {
     setIsOpenLogin(false);
@@ -28,24 +96,10 @@ function App() {
     setIsOpenPopupMenu(false);
   }
 
-  const handleLogin = (email, password) => {
-    //тут будет обработака запроса авторизации
-    setErrorServerMessage("Удача, но apiAuth еще не подключен :)");
-    setTimeout(() => {
-      setErrorServerMessage("");
-    }, 2000);
-  };
-
-  const handleRegister = (email, password, name) => {
-    //тут будет обработака запроса на регистрацию
-    setErrorServerMessage("Удача, но apiAuth еще не подключен :)");
-    setIsOpenPopupInfo(true);
-    setIsOpenRegister(false);
-  };
-
   function handleOpenLogin() {
     setIsOpenLogin(true);
     setErrorServerMessage("");
+    setIsOpenPopupMenu(false);
   }
 
   function handleOpenPopupMenu() {
@@ -75,6 +129,139 @@ function App() {
     }
   }
 
+  //********************************** */
+
+  function getUsersArticles() {
+    let jwt = localStorage.getItem("jwt");
+    MainApi.getArticles(jwt).then((res) => {
+      setSavedNewsCards(res.data);
+    });
+  }
+
+  //Функции для Авторизации и Регистрации и все что с этим связано
+
+  function onSignOut() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    localStorage.loggedIn = loggedIn;
+    setCurrentUser("");
+    setKeyword("");
+    localStorage.keyword = "";
+    localStorage.totalResult = 0;
+    localStorage.setItem("cards", JSON.stringify([]));
+    setIsSearchResult(false);
+    setIsOpenPopupMenu(false);
+    history.push("/");
+  }
+
+  function getUserInfo() {
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      MainApi.getUserInfo(jwt)
+        .then((res) => {
+          setCurrentUser(res.name);
+        })
+        .catch((err) => {
+          setCurrentUser("NoName");
+        });
+    }
+  }
+
+  const tokenCheck = () => {
+    //Проверка на наличие токена в локальном хранилище
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      setLoggedIn(true);
+      getUserInfo();
+      getUsersArticles();
+    }
+  };
+
+  const onLogin = (email, password) => {
+    ////тут обработака запроса авторизации
+    MainApi.authorize(email, password)
+      .then((data) => {
+        if (data) {
+          setLoggedIn(true);
+          closeAllPopups();
+          localStorage.loggedIn = loggedIn;
+          getUserInfo();
+          getUsersArticles();
+        }
+      })
+      .catch((err) => {
+        if (err.status === 401 || err.status === 403) {
+          setErrorServerMessage("Неверный логин или пароль");
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage("");
+        }, 2000);
+      });
+  };
+
+  const onRegister = (email, password, name) => {
+    ////тут обработака запроса регистрации
+    MainApi.register(email, password, name)
+      .then((data) => {
+        if (data) {
+          setIsOpenPopupInfo(true);
+          setIsOpenRegister(false);
+        }
+      })
+      .catch((err) => {
+        if (err.status === 409) {
+          setErrorServerMessage("Пользователь с таким email уже существует");
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage("");
+        }, 2000);
+      });
+  };
+
+  //********************************** */
+
+  //Функции Сохранения и удаления статей
+
+  function onSaveNewsArticle(keyword, title, text, date, source, link, image) {
+    let jwt = localStorage.getItem("jwt");
+    return MainApi.createArticles(
+      jwt,
+      keyword,
+      title,
+      text,
+      date,
+      source,
+      link,
+      image
+    ).catch((err) => console.log(err.message));
+  }
+
+  function onDeleteArticles(articleId) {
+    let jwt = localStorage.getItem("jwt");
+    return MainApi.deleteArticles(jwt, articleId).then(() => {
+      const delSavedArticles = savedNewsCards.filter(
+        (a) => a._id !== articleId
+      );
+      setSavedNewsCards(delSavedArticles);
+    });
+  }
+
+  //********************************** */
+
+  React.useEffect(() => {
+    tokenCheck();
+    setKeyword(localStorage.keyword);
+    if (localStorage.keyword) {
+      setIsSearchResult(true);
+    }
+    setNewsCards(JSON.parse(localStorage.getItem("cards")));
+    setTotalResult(localStorage.totalResult);
+  }, []);
+
   return (
     <Router history={history}>
       <div className="page">
@@ -87,20 +274,53 @@ function App() {
           isOpenLogin={isOpenLogin}
           isOpenRegister={isOpenRegister}
           isOpenPopupInfo={isOpenPopupInfo}
+          userName={currentUser}
+          onSignOut={onSignOut}
+          // keyword={keyword}
         />
+
         <Switch>
           <Route exact path="/">
-            <Main />
+            <Main
+              loggedIn={loggedIn}
+              onSaveNewsArticle={onSaveNewsArticle}
+              onDeleteArticles={onDeleteArticles}
+              onUpdateKeyword={handleUpdateKeyword}
+              isPreloader={isPreloader}
+              isErrorServer={isErrorServer}
+              errorMessage={errorMessage}
+              newsCards={newsCards}
+              setNewsCards={setNewsCards}
+              totalResult={totalResult}
+              isSearchResult={isSearchResult}
+              showItems={showItems}
+              handleShowMeMore={handleShowMeMore}
+              getUsersArticles={getUsersArticles}
+              keyword={keyword}
+              setKeyword={setKeyword}
+            />
           </Route>
-          <Route path="/saved-news">
-            <SavedNews />
-          </Route>
+
+          <CurrentUserContext.Provider value={currentUser}>
+            <ProtectedRoute
+              exact
+              path="/saved-news"
+              loggedIn={loggedIn}
+              savedNewsCards={savedNewsCards}
+              keyword={keyword}
+              onDeleteArticles={onDeleteArticles}
+              userName={currentUser}
+              component={SavedNews}
+              onOpenLogin={handleOpenLogin}
+            />
+          </CurrentUserContext.Provider>
         </Switch>
+
         <Login
           isOpen={isOpenLogin}
           onResetForm={isResetForm}
           onClose={closeAllPopups}
-          onLogin={handleLogin}
+          onLogin={onLogin}
           onServerErrorMessage={errorServerMessage}
           redirect={handleRedirect}
         />
@@ -108,7 +328,7 @@ function App() {
           isOpen={isOpenRegister}
           onResetForm={isResetForm}
           onClose={closeAllPopups}
-          onRegister={handleRegister}
+          onRegister={onRegister}
           onServerErrorMessage={errorServerMessage}
           redirect={handleRedirect}
         />
@@ -120,6 +340,8 @@ function App() {
           onOpenLogin={handleOpenLogin}
           onOpenPopupMenu={handleOpenPopupMenu}
           onClosePopupMenu={handleClosePopupMenu}
+          userName={currentUser}
+          onSignOut={onSignOut}
         />
 
         <InfoTooltip
@@ -134,4 +356,3 @@ function App() {
 }
 
 export default App;
- 

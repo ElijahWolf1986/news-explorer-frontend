@@ -4,7 +4,10 @@ import NotFound from "../NotFound/NotFound";
 import { useLocation } from "react-router-dom";
 
 function NewsCardList(props) {
-  const cards = props.newsCards;
+  let cards = [];
+  if (props.newsCards) {
+    cards = props.newsCards;
+  }
   let location = useLocation();
 
   return (
@@ -21,12 +24,22 @@ function NewsCardList(props) {
         Результаты поиска
       </h2>
       <div className="news-cardlist__gallery">
-        {props.totalResult === 0 ? (
+        {cards.length === 0 ? (
           <NotFound />
         ) : (
           cards
             .map((item, id) => {
-              return <NewsCard newsCard={item} key={id} />;
+              return (
+                <NewsCard
+                  newsCard={item}
+                  key={id}
+                  loggedIn={props.loggedIn}
+                  onSaveNewsArticle={props.onSaveNewsArticle}
+                  keyword={props.keyword}
+                  onDeleteArticles={props.onDeleteArticles}
+                  getUsersArticles={props.getUsersArticles}
+                />
+              );
             })
             .slice(0, props.showItems)
         )}

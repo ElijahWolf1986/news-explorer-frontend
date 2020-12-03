@@ -12,7 +12,7 @@ class NewsApi {
       return res.json();
     } else {
       console.log(res.status);
-      return Promise.reject(res.status);
+      return Promise.reject(res);
     }
   }
 
